@@ -2,6 +2,24 @@
 {% block title %}Fyyur | Venues{% endblock %}
 {% block content %}
 {% for area in areas %}
+<style>
+	
+	li button{
+		width:50px;
+		color:red;
+		-webkit-appearance: none;
+		cursor: pointer;
+		outline: none;
+		margin-right: 300px;
+		margin-bottom: 35px;
+	}
+	li{
+		display:inline;
+	}
+	
+	
+	
+</style>
 <h3>{{ area.city }}, {{ area.state }}</h3>
 	<ul class="items">
 		{% for venue in area.venues %}
@@ -10,10 +28,30 @@
 				<i class="fas fa-music"></i>
 				<div class="item">
 					<h5>{{ venue.name }}</h5>
+					
 				</div>
 			</a>
+			<button class =btn data-id={{venue.id}}>
+				&cross;
+			</button>
+			
+				
 		</li>
 		{% endfor %}
 	</ul>
+	<script>
+		btns=document.querySelectorAll(".btn");
+		for (let i =0;i<btns.length;i++){
+			const btn= btns[i];
+			
+			btn.onclick= function(e){
+				const id = e.target.dataset.id;
+				console.log(e)
+				fetch('/venues/'+ id + '/delete_venue',{
+           			 method: 'DELETE'
+          })
+			}
+		}
+	</script>
 {% endfor %}
 {% endblock %}
