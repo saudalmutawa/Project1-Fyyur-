@@ -9,5 +9,14 @@ DEBUG = True
 # Connect to the database
 
 
-# TODO IMPLEMENT DATABASE URL (SOLVED)
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:9048@localhost:5432/fyyur'
+# SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:9048@localhost:5432/fyyur'
+
+class DatabaseURI:
+
+    # Just change the names of your database and crendtials and all to connect to your local system
+    DATABASE_NAME = "fyyur"
+    username = 'postgres'
+    password = '9048'
+    url = 'localhost:5432'
+    SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(
+        username, password, url, DATABASE_NAME)
